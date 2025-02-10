@@ -26,12 +26,13 @@ def train(
     save_rate,
     batch_size,
     scheduler,
-    X_border,
+    X_border_train,
     X_border_test,
+    U_border_train,
+    U_border_test,
     mean_std,
     param_adim,
     nb_simu,
-    force_inertie_bool,
 ):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     nb_it_tot = nb_epoch + len(train_loss["total"])
@@ -54,21 +55,15 @@ def train(
 
     nb_batches = 1000  #### A changer
 
-    X_border = X_border.to(device)
+    X_border_train = X_border_train.to(device)
     X_border_test = X_border_test.to(device).detach()
+    U_border_train = U_border_train.to(device)
+    U_border_test = U_border_test.to(device).detach()
     X_train = X_train.to(device)
     U_train = U_train.to(device)
     X_test_data = X_test_data.to(device).detach()
     U_test_data = U_test_data.to(device).detach()
     len_X_train_one = X_train.size(0) // nb_simu
-    goal_border_test = torch.tensor(
-        [
-            -mean_std["u_mean"] / mean_std["u_std"],
-            -mean_std["v_mean"] / mean_std["v_std"],
-        ],
-        dtype=torch.float32,
-        device=device,
-    ).expand(pred_border_test.shape[0], 2)
 
     for epoch in range(len(train_loss["total"]), nb_it_tot):
         time_start_batch = time.time()
@@ -81,7 +76,7 @@ def train(
                 X_train_batch = (
                     X_train[
                         (nb_batch % nb_simu)
-                        * len_X_train_one : (nb_batch % nb_simu + 1)
+                        * len_X_train_one:(nb_batch % nb_simu + 1)
                         * len_X_train_one
                     ]
                     .clone()
@@ -90,7 +85,7 @@ def train(
                 U_train_batch = (
                     U_train[
                         (nb_batch % nb_simu)
-                        * len_X_train_one : (nb_batch % nb_simu + 1)
+                        * len_X_train_one:(nb_batch % nb_simu + 1)
                         * len_X_train_one
                     ]
                     .clone()
@@ -103,16 +98,8 @@ def train(
 
             with torch.cuda.stream(stream_border):
                 # loss du border
-                pred_border = model(X_border)
-                goal_border = torch.tensor(
-                    [
-                        -mean_std["u_mean"] / mean_std["u_std"],
-                        -mean_std["v_mean"] / mean_std["v_std"],
-                    ],
-                    dtype=torch.float32,
-                    device=device,
-                ).expand(pred_border.shape[0], 2)
-                loss_border_cylinder = loss(pred_border[:, :2], goal_border)  # (MSE)
+                pred_border = model(X_border_train)
+                loss_border_cylinder = loss(pred_border, U_border_train)  # (MSE)
 
             torch.cuda.synchronize()
 
@@ -138,7 +125,7 @@ def train(
 
             # loss des bords
             pred_border_test = model(X_border_test)
-            loss_test_border = loss(pred_border_test[:, :2], goal_border_test)  # (MSE)
+            loss_test_border = loss(pred_border_test, U_border_test)  # (MSE)
 
             # loss totale
             loss_test = weight_data * loss_test_data + weight_border * loss_test_border
@@ -158,9 +145,9 @@ def train(
             test_loss["total"].append(loss_test.item())
             test_loss["data"].append(loss_test_data.item())
             test_loss["border"].append(loss_test_border.item())
-            train_loss["total"].append(total_batch.item())
-            train_loss["data"].append(data_batch.item())
-            train_loss["border"].append(border_batch.item())
+            train_loss["total"].append(total_batch)
+            train_loss["data"].append(data_batch)
+            train_loss["border"].append(border_batch)
 
         print(f"---------------------\nEpoch {epoch+1}/{nb_it_tot} :")
         print(f"---------------------\nEpoch {epoch+1}/{nb_it_tot} :", file=f)

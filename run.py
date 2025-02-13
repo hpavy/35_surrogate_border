@@ -88,7 +88,6 @@ class RunSimulation:
                 U_train=U_train,
                 X_test_data=X_test_data,
                 U_test_data=U_test_data,
-                Re=self.hyper_param["Re"],
                 time_start=self.time_start,
                 f=f,
                 folder_result=self.folder_result,

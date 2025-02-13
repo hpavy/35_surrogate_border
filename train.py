@@ -19,7 +19,6 @@ def train(
     U_train,
     X_test_data,
     U_test_data,
-    Re,
     time_start,
     f,
     folder_result,
@@ -58,7 +57,7 @@ def train(
     weight_border = torch.tensor(weight_border_init, dtype=torch.float32, device=device)
     weight_data = torch.tensor(weight_data_init, dtype=torch.float32, device=device)
 
-    nb_batches = 1000  #### A changer
+    nb_batches = 100  #### A changer
 
     X_border_train = X_border_train.to(device)
     X_border_test = X_border_test.to(device).detach()

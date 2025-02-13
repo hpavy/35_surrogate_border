@@ -102,4 +102,7 @@ class RunSimulation:
                 mean_std=mean_std,
                 param_adim=self.param_adim,
                 nb_simu=len(self.hyper_param["file"]),
+                u_border=self.hyper_param['u_border'],
+                v_border=self.hyper_param['v_border'],
+                p_border=self.hyper_param['p_border'],
             )

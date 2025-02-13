@@ -5,20 +5,20 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Le code se lance sur {device}")
 
 
-folder_result_name = "1_first_try"  # name of the result folder
+folder_result_name = "9_piche"  # name of the result folder
 
 
 # On utilise hyper_param_init uniquement si c'est un nouveau modèle
 hyper_param_init = {
     "H": [
-        230.67,
+        261.39,
     ],
     "ya0": [
-        0.0025,
+        0.00125,
     ],
     "m": 1.57,
     "file": [
-        "data_john_2_case_2.csv",
+        "model_1_case_1.csv",
     ],
     "nb_epoch": 1000,
     "save_rate": 10,
@@ -42,9 +42,11 @@ hyper_param_init = {
     "y_max": 0.06,
     "t_min": 6.5,
     "nb_period": 20,
-    "nb_period_plot": 2,
-    "nb_points_close_cylinder": 10,
-    "rayon_close_cylinder": 0.0135,
+    "u_border": True,
+    "v_border": False,
+    "p_border": True,
+    "r_min": 0.026/2,
+    'theta_border_min': 0.1
 }
 
 param_adim = {"V": 1.0, "L": 0.025, "rho": 1.2}

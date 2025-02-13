@@ -33,6 +33,9 @@ def train(
     mean_std,
     param_adim,
     nb_simu,
+    u_border,
+    v_border,
+    p_border
 ):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     nb_it_tot = nb_epoch + len(train_loss["total"])
@@ -49,6 +52,8 @@ def train(
     if device == torch.device("cuda"):
         stream_data = torch.cuda.Stream()
         stream_border = torch.cuda.Stream()
+
+    border_verify = [k for k, test_true in enumerate([u_border, v_border, p_border]) if test_true]
 
     weight_border = torch.tensor(weight_border_init, dtype=torch.float32, device=device)
     weight_data = torch.tensor(weight_data_init, dtype=torch.float32, device=device)
@@ -94,12 +99,11 @@ def train(
                 # loss des points de data
                 pred_data = model(X_train_batch)
                 loss_data = loss(U_train_batch, pred_data)
-                # loss_data = 1/10 * torch.mean((U_train_batch[:, 0]-pred_data[:, 0])**2) + 1/10 * torch.mean((U_train_batch[:, 1]-pred_data[:, 1])**2) + 100/10 * torch.mean((U_train_batch[:, 2]-pred_data[:, 2])**2)
 
             with torch.cuda.stream(stream_border):
                 # loss du border
                 pred_border = model(X_border_train)
-                loss_border_cylinder = loss(pred_border, U_border_train)  # (MSE)
+                loss_border_cylinder = loss(pred_border[:, border_verify], U_border_train[:, border_verify])  # (MSE)
 
             torch.cuda.synchronize()
 
@@ -125,7 +129,7 @@ def train(
 
             # loss des bords
             pred_border_test = model(X_border_test)
-            loss_test_border = loss(pred_border_test, U_border_test)  # (MSE)
+            loss_test_border = loss(pred_border_test[:, border_verify], U_border_test[:, border_verify])  # (MSE)
 
             # loss totale
             loss_test = weight_data * loss_test_data + weight_border * loss_test_border

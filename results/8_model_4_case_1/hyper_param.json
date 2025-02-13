@@ -1,0 +1,39 @@
+{
+    "H": [
+        261.39
+    ],
+    "ya0": [
+        0.00125
+    ],
+    "m": 1.57,
+    "file": [
+        "data_john_4_case_1.csv"
+    ],
+    "nb_epoch": 1000,
+    "save_rate": 10,
+    "dynamic_weights": true,
+    "lr_weights": 0.1,
+    "weight_data": 0.5,
+    "weight_border": 0.5,
+    "batch_size": 10000,
+    "nb_points_pde": 1000000,
+    "Re": 100,
+    "lr_init": 0.0003,
+    "gamma_scheduler": 0.999,
+    "nb_layers": 10,
+    "nb_neurons": 64,
+    "n_pde_test": 5000,
+    "n_data_test": 5000,
+    "nb_points": 130,
+    "x_min": -0.06,
+    "x_max": 0.06,
+    "y_min": -0.06,
+    "y_max": 0.06,
+    "t_min": 6.5,
+    "nb_period": 20,
+    "u_border": true,
+    "v_border": false,
+    "p_border": true,
+    "r_min": 0.015,
+    "theta_border_min": 0.1
+}

@@ -1,0 +1,75 @@
+Nouveau modèle
+
+--------------------------
+Starting at epoch: 0
+--------------------------
+---------------------
+Epoch 1/1000 :
+Train : loss: 6.886e-01, data: 2.408e-01, border: 1.136e+00
+Test  : loss: 8.056e-02, data: 9.047e-02, border: 7.065e-02
+Weights  : ------------, data: 4.6e-01,   border: 5.4e-01
+time: 97s
+time: 93s
+---------------------
+Epoch 2/1000 :
+Train : loss: 3.369e-02, data: 5.076e-02, border: 1.911e-02
+Test  : loss: 2.021e-02, data: 3.426e-02, border: 8.220e-03
+Weights  : ------------, data: 4.6e-01,   border: 5.4e-01
+time: 152s
+time: 55s
+---------------------
+Epoch 3/1000 :
+Train : loss: 1.439e-02, data: 2.308e-02, border: 6.910e-03
+Test  : loss: 1.238e-02, data: 1.983e-02, border: 5.974e-03
+Weights  : ------------, data: 4.6e-01,   border: 5.4e-01
+time: 195s
+time: 43s
+---------------------
+Epoch 4/1000 :
+Train : loss: 1.001e-02, data: 1.476e-02, border: 5.913e-03
+Test  : loss: 9.917e-03, data: 1.412e-02, border: 6.290e-03
+Weights  : ------------, data: 4.6e-01,   border: 5.4e-01
+time: 287s
+time: 92s
+---------------------
+Epoch 5/1000 :
+Train : loss: 7.917e-03, data: 1.090e-02, border: 5.336e-03
+Test  : loss: 7.378e-03, data: 1.060e-02, border: 4.586e-03
+Weights  : ------------, data: 4.6e-01,   border: 5.4e-01
+time: 351s
+time: 64s
+---------------------
+Epoch 6/1000 :
+Train : loss: 6.778e-03, data: 8.855e-03, border: 4.977e-03
+Test  : loss: 6.872e-03, data: 8.986e-03, border: 5.041e-03
+Weights  : ------------, data: 4.6e-01,   border: 5.4e-01
+time: 398s
+time: 47s
+---------------------
+Epoch 7/1000 :
+Train : loss: 6.029e-03, data: 7.590e-03, border: 4.674e-03
+Test  : loss: 5.894e-03, data: 7.780e-03, border: 4.258e-03
+Weights  : ------------, data: 4.6e-01,   border: 5.4e-01
+time: 452s
+time: 54s
+---------------------
+Epoch 8/1000 :
+Train : loss: 5.521e-03, data: 6.740e-03, border: 4.463e-03
+Test  : loss: 6.093e-03, data: 7.162e-03, border: 5.164e-03
+Weights  : ------------, data: 4.6e-01,   border: 5.4e-01
+time: 496s
+time: 44s
+---------------------
+Epoch 9/1000 :
+Train : loss: 5.140e-03, data: 6.122e-03, border: 4.286e-03
+Test  : loss: 5.410e-03, data: 6.386e-03, border: 4.562e-03
+Weights  : ------------, data: 4.6e-01,   border: 5.4e-01
+time: 556s
+time: 59s
+---------------------
+Epoch 10/1000 :
+Train : loss: 4.869e-03, data: 5.656e-03, border: 4.185e-03
+Test  : loss: 4.591e-03, data: 5.756e-03, border: 3.577e-03
+Weights  : ------------, data: 4.7e-01,   border: 5.3e-01
+time: 622s
+time: 66s

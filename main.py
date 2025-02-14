@@ -6,7 +6,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Le code se lance sur {device}")
 
 
-folder_result_name = "10_huge"  # name of the result folder
+folder_result_name = "11_huge_without_dynamic"  # name of the result folder
 
 
 # On utilise hyper_param_init uniquement si c'est un nouveau modèle
@@ -15,7 +15,7 @@ hyper_param_init = {
     "case": [1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2,],
     "nb_epoch": 1000,
     "save_rate": 10,
-    "dynamic_weights": True,
+    "dynamic_weights": False,
     "lr_weights": 0.1,
     "weight_data": 0.5,
     "weight_border": 0.5,

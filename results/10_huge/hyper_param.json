@@ -39,7 +39,7 @@
         2,
         2
     ],
-    "nb_epoch": 1000,
+    "nb_epoch": 10000,
     "save_rate": 10,
     "dynamic_weights": true,
     "lr_weights": 0.1,

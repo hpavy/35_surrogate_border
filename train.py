@@ -38,6 +38,8 @@ def train(
 ):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     nb_it_tot = nb_epoch + len(train_loss["total"])
+    print(f"Il y a {sum(p.numel() for p in model.parameters() if p.requires_grad)} parametres")
+    print(f"Il y a {sum(p.numel() for p in model.parameters() if p.requires_grad)} parametres", file=f)
     print(
         f"--------------------------\nStarting at epoch: {len(train_loss['total'])}"
         + "\n--------------------------"

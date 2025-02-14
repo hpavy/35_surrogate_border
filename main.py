@@ -6,7 +6,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Le code se lance sur {device}")
 
 
-folder_result_name = "11_huge_without_dynamic"  # name of the result folder
+folder_result_name = "12_huge_rnn"  # name of the result folder
 
 
 # On utilise hyper_param_init uniquement si c'est un nouveau modèle
@@ -38,7 +38,10 @@ hyper_param_init = {
     "v_border": False,
     "p_border": True,
     "r_min": 0.026/2,
-    'theta_border_min': 0.1
+    'theta_border_min': 0.1,
+    'is_res': True,
+    'nb_blocks': 5,  # Pour RNN
+    'nb_layer_block': 3  # Pour RNN 
 }
 
 hyper_param_init['H'] = [DICT_CASE[str(k)] for k in hyper_param_init['case']]

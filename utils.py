@@ -3,7 +3,7 @@ import pandas as pd
 from pathlib import Path
 import torch.nn as nn
 import torch.optim as optim
-from model import PINNs
+from model import PINNs, ResNet
 import torch
 import time
 from geometry import RectangleWithoutCylinder
